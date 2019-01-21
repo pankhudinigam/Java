@@ -1,0 +1,28 @@
+// nth line of pascal's triangle
+import java.io.*;
+import java.util.*;
+
+class OptimizedPascalTriangle {
+  
+  public static void main(String[] args) {
+    int n = 11;
+    int[] lastRow = new int[n];
+    lastRow[0] = 1;
+    System.out.print(lastRow[0] + ", ");
+    System.out.println();
+    for(int i=2; i<n; i++) {
+      int[] currentRow = new int[n];
+      currentRow[0] = 1;
+      currentRow[i-1] = 1;
+      int limit = (i%2 == 0) ? i/2: i/2 + 1;
+      for(int j=1; j <= limit; j++) {
+          currentRow[j] = lastRow[j-1] + lastRow[j];
+          currentRow[i-j-1] = lastRow[j-1] + lastRow[j];
+      }
+      for(int j=0; j<i; j++)
+        System.out.print(currentRow[j] + ", ");
+      System.out.println();
+      lastRow = currentRow;
+    }
+  }
+}
